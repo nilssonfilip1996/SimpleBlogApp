@@ -1,0 +1,47 @@
+.gradient-background {
+    background: linear-gradient(to right, #6A82FB, #FC5C7D);
+    background-size: 180% 180%;
+    animation: gradient-animation 18s ease infinite;
+  }
+  
+  @keyframes gradient-animation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .blog-background{
+    background-image: url('/images/blue-mountains2.jpg');
+    background-size: cover;
+    min-height: 100vh;
+  }
+
+
+.disableAnchor {
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.supertext { 
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.hide-element {
+  display: none;
+}
+
+#loginModal {
+  backdrop-filter: blur(5px);
+}
+
+.textWarningColor {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: rgb(255, 0, 0);
+}

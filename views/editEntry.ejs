@@ -1,0 +1,75 @@
+<%- include('partials/header.ejs') %>
+
+
+<form class="mt-4 mx-2">
+  <div class="container mt-2">
+    <div class="row justify-content-center card p-3 border-primary text-bg-primary">
+      <div class="mb-3">
+        <label for="titelInput" class="form-label">Title</label>
+        <input 
+        type="text" 
+        class="form-control border-4" 
+        id="titelInput"
+        name="titelInput" 
+        placeholder=""
+        value="<%= entry.titel %>" />
+      </div>
+      <div class="mb-3">
+        <label for="textInput" class="form-label">Entry Text</label>
+        <textarea
+        class="form-control border-4" 
+        id="textInput"
+        name="textInput"  
+        rows="7"
+        ><%= entry.text %></textarea>
+      </div>
+      <div class="d-flex align-items-start card-body">
+        <p class="flex-grow-1 m-auto"><b>Posted:</b> <%= entry.date %> </p>
+        <div class="d-flex flex-column flex-md-row gap-2">
+          <button class="btn btn-success" type="submit" formmethod="post" formaction="/updateEntry/<%= entryId %>">Save</button>
+          <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-whatever="<%=entryId%>">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+
+
+<!-- Modal that is rendered when the user clicks on the delete button within a blog entry.-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title m-auto" id="exampleModalLabel">Delete post?</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <form method="post">
+          <button type="submit" class="btn btn-danger" id="deleteBtnModal">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Script that triggers when the deletemodal is showed.
+  // Script recognizes which entries delete-button was pressed and extracts it's id.
+  // It then updates the modals delete-button with the correct post-route.
+  const deleteModal = document.getElementById('deleteModal');
+  if(deleteModal){
+    deleteModal.addEventListener('show.bs.modal', function (event) {
+      // Button that triggered the modal
+      const button = event.relatedTarget;
+      // Extract info from data-bs-* attributes
+      var entryId = button.getAttribute('data-bs-whatever');
+      const deleteBtn = deleteModal.querySelector('#deleteBtnModal');
+      deleteBtn.setAttribute('formAction', `/delete/${entryId}`);
+    });
+  }
+</script>
+
+
+<%- include('partials/footer.ejs') %> 
